@@ -1,0 +1,116 @@
+<html>
+    <head>
+        <title>SPA gatti casuali</title>
+
+        <!-- CSS -->
+        <style>
+            .contentitore-btn{
+                display: flex;
+                justify-content: center;
+                margin: 20px;
+            }
+            .contentitore-btn .btn{
+                margin-right: 10px;
+                margin-left: 10px;
+            }
+
+            .btn{
+                text-align: center;
+                font-size: 24px;
+                background-color: plum;
+                padding: 10px;
+                border: 1px solid #2a2a2a;
+                border-radius: 5%;
+                font-family:Verdana, Geneva, Tahoma, sans-serif;
+                /* height: 50px;
+                width: 200px; */
+            }
+
+            .btn:hover{
+                background-color: rgb(172, 119, 172);
+            }
+
+            .contenitore-gatto-casuale{
+                text-align: center;
+            }
+            #gatto-casuale{
+                height: 400px;
+                width: auto;
+            }
+
+            #gatti-salvati{
+                display: flex;
+                margin: 50px;
+                border: 5px solid #2a2a2a;
+                justify-content: space-around;
+                flex-wrap: wrap;
+            }
+
+            #gatti-salvati img{
+                height: 144px;
+                margin: 10px;
+            }
+
+        </style>
+    </head>
+
+
+    <body>
+        <!-- HTML -->
+        <div class="contentitore-btn">
+            <button id="btn-ricarica" class="btn">Nuovo gatto</button>
+            <button id="btn-salva" class="btn">Salva</button>
+        </div>
+        
+        <div class="contenitore-gatto-casuale">
+            <img id="gatto-casuale" src="" alt="">
+        </div>
+
+        <!-- salveremo i gatti in questo div -->
+        <div id="gatti-salvati"></div>
+
+        
+        <!-- JavaScript -->
+        <script>
+const imgGattoCasuale = document.getElementById("gatto-casuale");
+const divGattiSalvati = document.getElementById("gatti-salvati");
+const btnRicarica     = document.getElementById("btn-ricarica");
+const btnSalva        = document.getElementById("btn-salva");
+
+let canSave = true;
+
+async function getRandomCat() {
+    const url = "https://cataas.com/cat?json=true";
+    const response = await fetch(url);
+    if (response.ok) {
+        const body = await response.json();
+        imgGattoCasuale.src = body.url;
+    }
+    canSave = true;
+}
+
+async function salvaGatto(){
+    const nuovaImg = document.createElement("img");
+    nuovaImg.src = imgGattoCasuale.src;
+    if (!canSave)
+        return;
+    console.log(divGattiSalvati.children)
+    divGattiSalvati.appendChild(nuovaImg);
+    canSave = false;
+}
+
+btnRicarica. addEventListener("click", getRandomCat);
+btnSalva.    addEventListener("click", salvaGatto);
+
+// All'avvio della pagina
+getRandomCat();
+if (canSave) {
+    btnSalva.style.backgroundColor = "plum";
+}
+else{
+    btnSalva.style.backgroundColor = "#baa0ba";
+}
+
+        </script>
+    </body>
+</html>
