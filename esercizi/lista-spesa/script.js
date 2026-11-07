@@ -36,6 +36,7 @@ function canAdd(itemToAdd){
 }
 
 function aggiungi(){    
+    errore_p.textContent = "";
     const item = item_input.value;
 
     is_aggiungibile = canAdd(item);
