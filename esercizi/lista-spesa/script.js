@@ -11,8 +11,6 @@ const btn_aggiungi = document.getElementById("btn-aggiungi");
 const lista        = document.getElementById("lista");
 const errore_p     = document.getElementById("errore");
 
-let items = [];
-
 function handle_mistake(error){
     if (error === "empty-item"){
         errore_p.textContent = "Oggetto vuoto!";
@@ -60,8 +58,13 @@ function aggiungi(){
 
     nuovoItemLi.appendChild(nuovoItemSpan);
     nuovoItemLi.appendChild(remove_btn);
-    
-    items.push(item)
+
+    nuovoItemLi.addEventListener("click", () => 
+        {
+            nuovoItemLi.className = (nuovoItemLi.className === "done") ? "" : "done";         
+        }
+    )
+
     lista.appendChild(nuovoItemLi);
 
     item_input.value = ""

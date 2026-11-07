@@ -43,7 +43,7 @@ li button {
     background-color: #dc3545;
 }
 
-.done {
+.done span{
     text-decoration: line-through;
     color: #999;
 }
